@@ -15,10 +15,10 @@ create_group_df <- function (group_name) {
     # -----------------------------
     # Get observation variables ---
     # -----------------------------
-    path <- gsub("-name-", group_name, "./data/-name-/X_-name-.txt")
+    path <- gsub("-name-", group_name, "./-name-/X_-name-.txt")
     x <- read.table(path)
     # get features list ...
-    features <- read.table('./data/features.txt')
+    features <- read.table('./features.txt')
     names(features) <- c('index', 'name')
     # ... retrieve positions of Mean and SD columns ...
     mean_mask <- with(features, grepl("mean\\(\\)", name))
@@ -33,11 +33,11 @@ create_group_df <- function (group_name) {
     # ---------------------
     # Get activity flag ---
     # ---------------------
-    path <- gsub("-name-", group_name, "./data/-name-/y_-name-.txt")
+    path <- gsub("-name-", group_name, "./-name-/y_-name-.txt")
     y <- read.table(path)
     names(y) <- c('short') 
     # get activity labels mapping ...
-    activity_labels <- read.table('./data/activity_labels.txt')
+    activity_labels <- read.table('./activity_labels.txt')
     names(activity_labels) <- c('short', 'long')
     # ... merge them with activity flags data and get label column.
     activity_long <- merge(activity_labels, y)$long
@@ -45,7 +45,7 @@ create_group_df <- function (group_name) {
     # -----------------------
     # Get subject mapping ---
     # -----------------------
-    path <- gsub("-name-", group_name, "./data/-name-/subject_-name-.txt")
+    path <- gsub("-name-", group_name, "./-name-/subject_-name-.txt")
     subject_df <- read.table(path) 
     names(subject_df) <- c('subjectid')
     
@@ -69,7 +69,7 @@ run <- function() {
     
     final_df <- rbind(train_df, test_df)
     
-    write.csv(file='./data/complete.csv', x=final_df)
+    write.csv(file='./complete.csv', x=final_df)
     
     # generate simple dataframe with averages for each activity
     # and each subject
@@ -81,7 +81,6 @@ run <- function() {
     data_columns = final_names[3:68]
     # generate simple csv
     simple_df <- ddply(final_df, group_columns, function(x) colMeans(x[data_columns]))   
-    write.csv(file='./data/simple.csv', x=simple_df)
+    write.csv(file='./simple.csv', x=simple_df)
 } 
 
-run()
