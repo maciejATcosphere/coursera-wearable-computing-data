@@ -6,3 +6,11 @@
 
 # R data files from past sessions
 .Rdata
+
+# ignore all zip and csv data files
+/data/*.zip
+/data/*.txt
+/data/train/*.txt
+/data/train/Inertial\ Signals/*.txt
+/data/test/*.txt
+/data/test/Inertial\ Signals/*.txt
