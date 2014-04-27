@@ -1,3 +1,7 @@
+
+# ----------------------------------------------------------
+# Fetch zipped data, build directory structure and clean up
+# ----------------------------------------------------------
 get_data <- function () {
     if(!file.exists("./data")){
         dir.create("./data")
